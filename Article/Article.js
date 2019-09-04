@@ -85,6 +85,20 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Meera Is Cool',
+    date: 'Sep 4th, 2019',
+    firstParagraph: `Scooby Dooby Doo. Scooby Dooby DooScooby Dooby DooScooby Dooby DooScooby Dooby DooScooby Dooby DooScooby Dooby DooScooby Dooby DooScooby Dooby 
+    DooScooby Dooby DooScooby Dooby Doo. Scooby Dooby Doo. Scooby Dooby DooScooby Dooby DooScooby Dooby DooScooby Dooby DooScooby Dooby DooScooby Dooby DooScooby Dooby DooScooby Dooby 
+    DooScooby Dooby DooScooby Dooby Doo. `,
+
+    secondParagraph: `Button, Button. Who has the button? Button, Button. Who has the button? Button, Button. Who has the button? Button, Button. Who has the button? Button, Button. Who has the button?
+    Button, Button. Who has the button? Button, Button. Who has the button? Button, Button. Who has the button? Button, Button. Who has the button? Button, Button. Who has the button?`,
+
+    thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+          Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
 
@@ -111,4 +125,92 @@ const data = [
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
+*/
+
+const articles = document.querySelector('.articles');
+
+
+function createArticle(title, date, firstParagraph, secondParagraph, thirdParagraph){
+  const articleCard = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const para1 = document.createElement('p');
+  const para2 = document.createElement('p');
+  const para3 = document.createElement('p');
+  const button = document.createElement('span');
+
+ //Setup structure of elements
+  articleCard.appendChild(articleTitle);
+  articleCard.appendChild(articleDate);
+  articleCard.appendChild(para1);
+  articleCard.appendChild(para2);
+  articleCard.appendChild(para3);
+  articleCard.appendChild(button);
+
+  // set class names
+  articleCard.classList.add('article');
+  articleDate.classList.add('date');
+  button.classList.add('expandButton');
+
+  //set text content
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  para1.textContent = firstParagraph;
+  para2.textContent = secondParagraph;
+  para3.textContent = thirdParagraph;
+  button.textContent = 'Read More'
+
+
+  //set event listener to buton. This event listener should toggle the class 'article-open' on the 'article' div.
+button.addEventListener('click', e => {
+  articleCard.classList.toggle('article-open');
+  articleCard.classList.toggle('close');
+    // button.classList.toggle('article');
+  })
+
+  return articleCard;
+};
+
+
+let newArticleComponents = data.map((arrayItem) => {
+  let newArticle = createArticle(arrayItem.title, arrayItem.date, arrayItem.firstParagraph, arrayItem.secondParagraph, arrayItem.thirdParagraph);
+
+  return newArticle;
+})
+
+newArticleComponents.forEach(component => {
+  articles.appendChild(component);
+})
+
+// data.forEach(data => {
+//   articles.appendChild(createArticle(data.title, data.date, data.firstParagraph, data.secondParagraph, data.thirdParagraph))
+// })
+
+// const Feed = data.map(item => {
+//   body.appendChild(createArticle(item.title,item.date,item.firstParagraph,item.secondParagraph,item.thirdParagraph));
+// });
+
+// const newArticleComponents = data.map(item => {
+//   item.forEach(component => {
+//     articles.appendChild(createArticle(item.title,item.date,item.firstParagraph,item.secondParagraph,item.thirdParagraph));
+//   })
+
+
+//   return newArticleComponents;
+// })
+
+
+/*
+let newComponents = data.map((arrayItem) => {
+  let newButton = buttonCreator(arrayItem);
+
+  // Remember, we always need to return something when we use .map
+  return newButton;
+});
+Now that we have an array of DOM elements (components) we can do whatever we’d like with them. We can wait to add the components to the DOM, we can manipulate them further, the sky is the limit! Let’s just add them to the DOM now, using .forEach
+
+Copy
+newComponents.forEach(component => {
+  parent.appendChild(component);
+});
 */
