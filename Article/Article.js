@@ -144,20 +144,59 @@ function createArticle(title, date, firstParagraph, secondParagraph, thirdParagr
   para1.textContent = firstParagraph;
   para2.textContent = secondParagraph;
   para3.textContent = thirdParagraph;
+  button.textContent = 'Read More'
 
 
   //set event listener to buton. This event listener should toggle the class 'article-open' on the 'article' div.
 button.addEventListener('click', e => {
-    button.classList.toggle('article-open');
-    button.classList.toggle('article');
+  articleCard.classList.toggle('article-open');
+  articleCard.classList.toggle('close');
+    // button.classList.toggle('article');
   })
 
   return articleCard;
 };
 
-data.forEach(data => {
-  articles.appendChild(createArticle(data.title, data.date, data.firstParagraph, data.secondParagraph, data.thirdParagraph))
+
+let newArticleComponents = data.map((arrayItem) => {
+  let newArticle = createArticle(arrayItem.title, arrayItem.date, arrayItem.firstParagraph, arrayItem.secondParagraph, arrayItem.thirdParagraph);
+
+  return newArticle;
 })
 
+newArticleComponents.forEach(component => {
+  articles.appendChild(component);
+})
+
+// data.forEach(data => {
+//   articles.appendChild(createArticle(data.title, data.date, data.firstParagraph, data.secondParagraph, data.thirdParagraph))
+// })
+
+// const Feed = data.map(item => {
+//   body.appendChild(createArticle(item.title,item.date,item.firstParagraph,item.secondParagraph,item.thirdParagraph));
+// });
+
+// const newArticleComponents = data.map(item => {
+//   item.forEach(component => {
+//     articles.appendChild(createArticle(item.title,item.date,item.firstParagraph,item.secondParagraph,item.thirdParagraph));
+//   })
 
 
+//   return newArticleComponents;
+// })
+
+
+/*
+let newComponents = data.map((arrayItem) => {
+  let newButton = buttonCreator(arrayItem);
+
+  // Remember, we always need to return something when we use .map
+  return newButton;
+});
+Now that we have an array of DOM elements (components) we can do whatever we’d like with them. We can wait to add the components to the DOM, we can manipulate them further, the sky is the limit! Let’s just add them to the DOM now, using .forEach
+
+Copy
+newComponents.forEach(component => {
+  parent.appendChild(component);
+});
+*/
